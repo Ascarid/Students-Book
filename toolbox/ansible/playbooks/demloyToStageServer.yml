@@ -1,0 +1,25 @@
+- name: Pool students-book
+  hosts: staging
+  become: true
+  tasks:
+
+  - name: stop all docker containers
+    shell: docker stop $(docker ps -a -q)
+    ignore_errors: true
+
+  - name: remove all docker containers
+    shell: docker rm $(docker ps -a -q)
+    ignore_errors: true
+
+  - name: Remove image
+    docker_image:
+      name: macnaer/students-book
+      state: absent
+
+  - name: Pull image
+    docker_image:
+      name: macnaer/students-book
+
+  - name: Start macnaer/students-book
+    shell: docker run -d -p 80:3000 macnaer/students-book
+ 
