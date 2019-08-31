@@ -1,6 +1,6 @@
 FROM node:latest
 
-MAINTAINER macnaer
+MAINTAINER ascarid
 
 
 COPY  . /var/www
